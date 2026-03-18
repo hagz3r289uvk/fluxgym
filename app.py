@@ -605,8 +605,7 @@ def gen_sh(
   --discrete_flow_shift 3.1582 {line_break}
   --model_prediction_type raw {line_break}
   --guidance_scale {guidance_scale} {line_break}
-  --network_alpha 8 {line_break}
-  --unet_lr 1e-4 {line_break}
+  --network_alpha 2 {line_break}
   --enable_bucket {line_break}
   --full_bf16 {line_break}
   --huber_c 1 {line_break}
@@ -1288,7 +1287,7 @@ with gr.Blocks(
                         learning_rate = gr.Textbox(
                             label="--learning_rate",
                             info="Learning Rate",
-                            value="2e-4",
+                            value="8e-4",
                             interactive=True,
                         )
                     with gr.Column(min_width=300):
