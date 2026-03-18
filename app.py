@@ -594,7 +594,6 @@ def gen_sh(
   --learning_rate {learning_rate} {line_break}
   --cache_text_encoder_outputs {line_break}
   --cache_text_encoder_outputs_to_disk {line_break}
-  --fp8_base {line_break}
   --highvram {line_break}
   --max_train_epochs {max_train_epochs} {line_break}
   --save_every_n_epochs {save_every_n_epochs} {line_break}
@@ -614,12 +613,13 @@ def gen_sh(
   --lr_scheduler_num_cycles 1 {line_break}
   --lr_scheduler_power 1 {line_break}
   --max_bucket_reso 1024 {line_break}
-  --max_train_steps 1800 {line_break}
-  --min_bucket_reso 256 {line_break}
+  --max_train_steps 1200 {line_break}
+  --min_bucket_reso 512 {line_break}
   --min_snr_gamma 7 {line_break}
   --multires_noise_iterations 0 {line_break}
   --noise_offset 0.05 {line_break}
   --prior_loss_weight 1 {line_break}
+  --resolution "1024,1024" {line_break}
   --sample_sampler euler {line_break}
   --t5xxl_max_token_length 256 {line_break}
   --validation_seed 999 {line_break}
