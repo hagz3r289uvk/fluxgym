@@ -619,7 +619,7 @@ def gen_sh(
   --multires_noise_iterations 0 {line_break}
   --noise_offset 0.05 {line_break}
   --prior_loss_weight 1 {line_break}
-  --resolution "1024,1024" {line_break}
+  --resolution "768,768" {line_break}
   --sample_sampler euler {line_break}
   --t5xxl_max_token_length 256 {line_break}
   --validation_seed 999 {line_break}
