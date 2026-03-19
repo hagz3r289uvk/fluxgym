@@ -612,6 +612,7 @@ def gen_sh(
   --huber_schedule snr {line_break}
   --lr_scheduler_num_cycles 1 {line_break}
   --lr_scheduler_power 1 {line_break}
+  --bucket_reso_steps 128 {line_break}
   --max_bucket_reso 1024 {line_break}
   --max_train_steps 1200 {line_break}
   --min_bucket_reso 512 {line_break}
