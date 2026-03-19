@@ -6,6 +6,20 @@
 #   license_name: <follow the other examples. only needed for dev inherited models>
 #   license_link: <follow the other examples. only needed for dev inherited models>
 #   file: <the file name within the huggingface repo>
+civitai-1728250-v3:
+    repo: littleceasar/flux_lora_training
+    base: black-forest-labs/FLUX.1-dev
+    license: other
+    license_name: flux-1-dev-non-commercial-license
+    license_link: https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md
+    file: CivitAI-1728250-v3.safetensors
+civitai-1728250-v2:
+    repo: littleceasar/flux_lora_training
+    base: black-forest-labs/FLUX.1-dev
+    license: other
+    license_name: flux-1-dev-non-commercial-license
+    license_link: https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md
+    file: CivitAI-1728250-v2.safetensors
 flux-dev:
     repo: cocktailpeanut/xulf-dev
     base: black-forest-labs/FLUX.1-dev
@@ -25,17 +39,3 @@ bdsqlsz/flux1-dev2pro-single:
     license_name: flux-1-dev-non-commercial-license
     license_link: https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md
     file: flux1-dev2pro.safetensors
-civitai-1728250-v2:
-    repo: littleceasar/flux_lora_training
-    base: black-forest-labs/FLUX.1-dev
-    license: other
-    license_name: flux-1-dev-non-commercial-license
-    license_link: https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md
-    file: CivitAI-1728250-v2.safetensors
-civitai-1728250-v3:
-    repo: littleceasar/flux_lora_training
-    base: black-forest-labs/FLUX.1-dev
-    license: other
-    license_name: flux-1-dev-non-commercial-license
-    license_link: https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md
-    file: CivitAI-1728250-v3.safetensors

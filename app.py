@@ -606,6 +606,7 @@ def gen_sh(
   --guidance_scale {guidance_scale} {line_break}
   --network_alpha 8 {line_break}
   --enable_bucket {line_break}
+  --fp8_base {line_break}
   --full_bf16 {line_break}
   --huber_c 1 {line_break}
   --huber_scale 0.1 {line_break}
