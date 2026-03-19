@@ -604,7 +604,7 @@ def gen_sh(
   --discrete_flow_shift 3.1582 {line_break}
   --model_prediction_type raw {line_break}
   --guidance_scale {guidance_scale} {line_break}
-  --network_alpha 2 {line_break}
+  --network_alpha 8 {line_break}
   --enable_bucket {line_break}
   --full_bf16 {line_break}
   --huber_c 1 {line_break}
@@ -617,13 +617,13 @@ def gen_sh(
   --min_bucket_reso 512 {line_break}
   --min_snr_gamma 7 {line_break}
   --multires_noise_iterations 0 {line_break}
-  --noise_offset 0.05 {line_break}
+  --noise_offset 0.03 {line_break}
   --prior_loss_weight 1 {line_break}
   --resolution "768,768" {line_break}
   --sample_sampler euler {line_break}
   --t5xxl_max_token_length 256 {line_break}
+  --train_batch_size 1 {line_break}
   --validation_seed 999 {line_break}
-  --network_args "train_single_block_indices=7,12,16,20,24" {line_break}
   --loss_type l2 {line_break}"""
 
     ############# Advanced args ########################
@@ -1287,7 +1287,7 @@ with gr.Blocks(
                         learning_rate = gr.Textbox(
                             label="--learning_rate",
                             info="Learning Rate",
-                            value="8e-4",
+                            value="1e-4",
                             interactive=True,
                         )
                     with gr.Column(min_width=300):
