@@ -1156,7 +1156,7 @@ with gr.Blocks(
                     )
                     max_train_epochs = gr.Number(
                         label="Max Train Epochs",
-                        value=16,
+                        value=7,
                         interactive=True,
                     )
                     total_steps = gr.Number(
@@ -1289,7 +1289,7 @@ with gr.Blocks(
                         learning_rate = gr.Textbox(
                             label="--learning_rate",
                             info="Learning Rate",
-                            value="1e-4",
+                            value="4e-4",
                             interactive=True,
                         )
                     with gr.Column(min_width=300):
