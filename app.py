@@ -450,47 +450,75 @@ def gen_sh(
     clip_path = resolve_path("models/clip/clip_l.safetensors")
     t5_path = resolve_path("models/clip/t5xxl_fp16.safetensors")
     ae_path = resolve_path("models/vae/ae.sft")
-    sh = f"""accelerate launch {line_break}
-  --mixed_precision bf16 {line_break}
-  --num_cpu_threads_per_process 1 {line_break}
-  sd-scripts/flux_train_network.py {line_break}
-  --pretrained_model_name_or_path {pretrained_model_path} {line_break}
-  --clip_l {clip_path} {line_break}
-  --t5xxl {t5_path} {line_break}
-  --ae {ae_path} {line_break}
-  --cache_latents_to_disk {line_break}
-  --save_model_as safetensors {line_break}
-  --sdpa --persistent_data_loader_workers {line_break}
-  --max_data_loader_n_workers {workers} {line_break}
-  --seed {seed} {line_break}
-  --gradient_checkpointing {line_break}
-  --mixed_precision bf16 {line_break}
-  --save_precision bf16 {line_break}
-  --network_module networks.lora_flux {line_break}
-  --network_dim {network_dim} {line_break}
-  {optimizer}{sample}
-  --learning_rate {learning_rate} {line_break}
-  --cache_text_encoder_outputs {line_break}
-  --cache_text_encoder_outputs_to_disk {line_break}
-  --fp8_base {line_break}
-  --highvram {line_break}
-  --max_train_epochs {max_train_epochs} {line_break}
-  --save_every_n_epochs {save_every_n_epochs} {line_break}
-  --dataset_config {resolve_path(f"outputs/{output_name}/dataset.toml")} {line_break}
-  --output_dir {output_dir} {line_break}
-  --output_name {output_name} {line_break}
-  --timestep_sampling {timestep_sampling} {line_break}
-  --discrete_flow_shift 3.1582 {line_break}
-  --model_prediction_type raw {line_break}
-  --guidance_scale {guidance_scale} {line_break}
-  --loss_type l2 {line_break}"""
-   
+        sh = f"""accelerate launch {line_break}
+    --mixed_precision bf16 {line_break}
+    --num_cpu_threads_per_process 1 {line_break}
+    sd-scripts/flux_train_network.py {line_break}
+    --pretrained_model_name_or_path {pretrained_model_path} {line_break}
+    --clip_l {clip_path} {line_break}
+    --t5xxl {t5_path} {line_break}
+    --ae {ae_path} {line_break}
+    --save_model_as safetensors {line_break}
+    --sdpa --persistent_data_loader_workers {line_break}
+    --max_data_loader_n_workers {workers} {line_break}
+    --seed {seed} {line_break}
+    --gradient_checkpointing {line_break}
+    --mixed_precision bf16 {line_break}
+    --save_precision bf16 {line_break}
+    --network_module networks.lora_flux {line_break}
+    --network_dim {network_dim} {line_break}
+    {optimizer}{sample}
+    --learning_rate {learning_rate} {line_break}
+    --cache_text_encoder_outputs {line_break}
+    --cache_text_encoder_outputs_to_disk {line_break}
+    --fp8_base {line_break}
+    --highvram {line_break}
+    --max_train_epochs {max_train_epochs} {line_break}
+    --save_every_n_epochs {save_every_n_epochs} {line_break}
+    --dataset_config {resolve_path(f"outputs/{output_name}/dataset.toml")} {line_break}
+    --output_dir {output_dir} {line_break}
+    --output_name {output_name} {line_break}
+    --timestep_sampling {timestep_sampling} {line_break}
+    --discrete_flow_shift 3.1582 {line_break}
+    --model_prediction_type raw {line_break}
+    --guidance_scale {guidance_scale} {line_break}
+    --full_bf16 {line_break}
+    --huber_c 0.1 {line_break}
+    --huber_scale 1 {line_break}
+    --huber_schedule snr {line_break}
+    --enable_bucket {line_break}
+    --bucket_no_upscale {line_break}
+    --bucket_reso_steps 64 {line_break}
+    --max_bucket_reso 1024 {line_break}
+    --min_bucket_reso 512 {line_break}
+    --network_alpha 16 {line_break}
+    --validation_seed 24 {line_break}
+    --resolution "1024,1024" {line_break}
+    --cache_latents {line_break}
+    --loss_type l2 {line_break}"""
 
+
+    #   --network_alpha 8 {line_break}
+    #   --lr_scheduler_power 1 {line_break}
+    #   --bucket_reso_steps 128 {line_break}
+    #   --max_bucket_reso 1024 {line_break}
+    #   --max_train_steps 1200 {line_break}
+    #   --min_bucket_reso 512 {line_break}
+    #   --min_snr_gamma 7 {line_break}
+    #   --multires_noise_iterations 0 {line_break}
+    #   --noise_offset 0.03 {line_break}
+    #   --prior_loss_weight 1 {line_break}
+    #   --resolution "768,768" {line_break}
+    #   --sample_sampler euler {line_break}
+    #   --t5xxl_max_token_length 256 {line_break}
+    #   --train_batch_size 1 {line_break}
+    #   --validation_seed 999 {line_break}
+    #   --loss_type l2 {line_break}"""
 
     ############# Advanced args ########################
     global advanced_component_ids
     global original_advanced_component_values
-   
+
     # check dirty
     print(f"original_advanced_component_values = {original_advanced_component_values}")
     advanced_flags = []
@@ -990,13 +1018,13 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
                     with gr.Column(min_width=300):
                         learning_rate = gr.Textbox(label="--learning_rate", info="Learning Rate", value="8e-4", interactive=True)
                     with gr.Column(min_width=300):
-                        save_every_n_epochs = gr.Number(label="--save_every_n_epochs", info="Save every N epochs", value=4, interactive=True)
+                        save_every_n_epochs = gr.Number(label="--save_every_n_epochs", info="Save every N epochs", value=1, interactive=True)
                     with gr.Column(min_width=300):
                         guidance_scale = gr.Number(label="--guidance_scale", info="Guidance Scale", value=1.0, interactive=True)
                     with gr.Column(min_width=300):
                         timestep_sampling = gr.Textbox(label="--timestep_sampling", info="Timestep Sampling", value="shift", interactive=True)
                     with gr.Column(min_width=300):
-                        network_dim = gr.Number(label="--network_dim", info="LoRA Rank", value=4, minimum=4, maximum=128, step=4, interactive=True)
+                        network_dim = gr.Number(label="--network_dim", info="LoRA Rank", value=16, minimum=4, maximum=128, step=4, interactive=True)
                     advanced_components, advanced_component_ids = init_advanced()
             with gr.Row():
                 terminal = LogsView(label="Train log", elem_id="terminal")
